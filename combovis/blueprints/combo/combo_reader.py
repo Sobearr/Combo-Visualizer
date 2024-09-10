@@ -34,6 +34,7 @@ def convert_combo(notation):
     # Mapping for move notations with patterns to ensure exact matching
     move_map = {
         r'\bj.': 'jumping ',
+        r'\bdl.': 'delay ',
         r'\b5': 'standing ',
         r'\b2': 'crouching ',
         r'\b3': 'fwd_diag_down ',
