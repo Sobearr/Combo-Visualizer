@@ -89,12 +89,14 @@ def favourite():
                 combo_str = request.form.get('combo_str')
                 cleaned_string = combo_str.strip("[]").strip('"')
                 combo_list = ast.literal_eval(cleaned_string)
-
                 drive_1 = ['DI', 'DR']
                 drive_2 = ['PP', 'KK', 'PPP', 'KKK']
                 drive = 0
                 bars = '0'
                 for btn in combo_list:
+                    if btn == 'unknown':
+                        flash('Cannot save combos with \'unknown\' inputs', 'warning')
+                        return redirect(url_for('combo.visualizer'))
                     if btn in ['qcb2', 'qcf2', 'charge_back_forward_back_forward', 'demon']:
                         print('detected a super!')
                         bars = '1'
