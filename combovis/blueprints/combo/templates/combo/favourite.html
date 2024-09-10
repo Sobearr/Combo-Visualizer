@@ -8,6 +8,7 @@
 {% endblock %}
 
 {% block content %}
+<div class="container mt-5">
     {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
             {% for category, message in messages %}
@@ -17,21 +18,21 @@
             {% endfor %}
         {% endif %}
     {% endwith %}
-    <h1>Favourite Combos</h1>
+    <h1 class="text-center">Favourite Combos</h1>
     {% if favourites %}
-    <table class="table table-light table-bordered table-hover align-middle">
+    <table class="table table-light table-striped table-bordered table-hover align-middle my-4">
         <thead>
             <tr>
-                <th scope="col">Combo</th>
-                <th scope="col">Drive Bars</th>
+                <th scope="col" class="text-center">Combo</th>
+                <th scope="col" class="text-nowrap">Drive Bars</th>
                 <th scope="col">Super</th>
-                <th scope="col">Remove</th>
+                <th scope="col"></th>
             </tr>
         </thead>
         <tbody>
             {% for combo in favourites %}
             <tr>
-                <td style="vertical-align: middle;">
+                <td>
                     {% for str in combo[1].notation %}
                         {% if str == 'crouching' %}
                             <img src="./static/img/{{ str }}.png" alt="{{ str }}" class="button">
@@ -105,8 +106,8 @@
                         {% endif %}
                     {% endfor %}
                 </td>
-                <td>{{ combo[1].drive }}</td>
-                <td>
+                <td class="text-center">{{ combo[1].drive }}</td>
+                <td class="text-center">
                     {% if combo[1].bars == '1' %}
                         Yes
                     {% else %}
@@ -114,7 +115,9 @@
                     {% endif %}
                 </td>
                 <td>
-                    <a href={{ url_for('combo.delete', id=combo[0])}}>Remove</a>
+                    <a href={{ url_for('combo.delete', id=combo[0])}}>
+                        <button type="button" class="btn btn-outline-danger">Remove</button>
+                    </a>
                 </td>
             </tr>
             {% endfor %}
@@ -123,4 +126,5 @@
     {% else %}
         <h3>You don't any favourite combos yet.</h3>
     {% endif %}
+</div>
 {% endblock %}
