@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% from 'bootstrap5/form.html' import render_form %}
+
+{% block title %}Log In{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                {% if category == 'message' %}
+                    <div class="alert alert-warning" id="hideMe" role="alert">
+                        {{ message }}
+                    </div>
+                {% else %}
+                    <div class=" alert alert-{{category}}" id="hideMe" role="alert">
+                        {{ message }}
+                    </div>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    <h1 class="text-center">Log In</h1>
+    {{ render_form(form) }}
+</div>
+{% endblock %}

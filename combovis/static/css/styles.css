@@ -1,0 +1,26 @@
+ /* Custom button color */
+ .btn-custom {
+    background-color: #28a745; /* Change to your desired color */
+    color: white;
+  }
+
+  .btn.btn-custom:hover {
+    background-color: #218838; /* Darker green on hover */
+    color: white;
+}
+
+  /* Dark mode background and text */
+  body {
+    background-color: #121212;
+    color: #e0e0e0;
+  }
+  .navbar {
+    background-color: #1c1c1c;
+  }
+  /* Adjusting navbar link positions */
+  .navbar-nav.ms-auto {
+    margin-right: auto; /* Pushes links to the right */
+  }
+  .navbar-nav.middle-link {
+    margin-left: auto; /* Places one link closer to the center */
+  }

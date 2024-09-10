@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block title %}Create-a-combo{% endblock %}
+
+{% block content %}
+<h1>Type your combo in the box below</h1>
+<form action="" method="post">
+    <input type="text" name="combo" id="" required>
+    <input type="submit" value="Create Combo">
+</form>
+
+<div>
+    {% if combo %}
+        <h2>This is the combo you created</h2>
+    {% endif %}
+    <div>
+        {% for str in combo %}
+            {% if str == 'crouching' %}
+                <img src="/static/img/{{ str }}.png" alt="{{ str }}" width="4%">
+            {% elif str == 'chain' %}
+                <img src="/static/img/{{ str }}.png" alt="{{ str }}" width="4%" style="margin-bottom: 1.6%; margin-right: 0.5%; margin-left: 0.5%;">
+            {% elif str == 'jumping' %}
+                <img src="/static/img/crouching.png" alt="hold_down" width="4%" style="transform: rotate(180deg);">
+            {% elif str == 'standing' %}
+            {% elif str == 'back' %}
+                <img src="/static/img/crouching.png" alt="hold_down" width="4%" style="transform: rotate(90deg); margin-right: 1.5%;">
+            {% elif str == 'forward' %}
+                <img src="/static/img/crouching.png" alt="hold_down" width="4%" style="transform: rotate(-90deg); margin-right: 1%;">
+            {% elif str == 'qcb' %}
+                <img src="/static/img/qcf.png" alt="{{ str }}" width="5%" style="transform: scaleX(-1);">
+            {% elif str == 'link' %}
+                <img src="/static/img/{{ str }}.png" alt="{{ str }}" width="3%" style="margin: 1% 1% 1%;">
+            {% elif str == 'cancel' %}
+                <img src="/static/img/{{ str }}.png" alt="{{ str }}" width="3%" style="margin: 1.15% 1% 1.15%;">
+            {% elif str == 'charge_down_up' %}
+                <img src="/static/img/charge_down.png" alt="{{ str }}" width="4%">
+                <img src="/static/img/crouching.png" alt="hold_down" width="4%" style="transform: rotate(180deg);">            
+            {% elif str == 'charge_back_forward' %}
+                <img src="/static/img/charge_back.png" alt="{{ str }}" width="5.9%" style="margin-bottom: 0.7%; margin-right: 0.5%;">
+                <img src="/static/img/crouching.png" alt="hold_down" width="4%" style="transform: rotate(-90deg); margin-right: 1%;">
+            {% elif str == 'PP' or str == 'KK' %}
+                <img src="/static/img/{{ str }}.png" alt="{{ str }}" width="7%">
+            {% elif str == 'PPP' or str == 'KKK' %}
+                <img src="/static/img/{{ str }}.png" alt="{{ str }}" width="9%">
+            {% else %}
+                <img src="/static/img/{{ str }}.png" alt="{{ str }}" width="4.7%">
+            {% endif %}
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

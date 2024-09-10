@@ -1,0 +1,126 @@
+{% extends 'base.html' %}
+
+{% block title %}Favourites{% endblock %}
+
+{% block styles %}
+    {{ super() }}
+    <link rel="stylesheet" href="./static/css/styles.css">
+{% endblock %}
+
+{% block content %}
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class=" alert alert-{{ category }}" id="hideMe" role="alert">
+                    {{message}}
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    <h1>Favourite Combos</h1>
+    {% if favourites %}
+    <table class="table table-light table-bordered table-hover align-middle">
+        <thead>
+            <tr>
+                <th scope="col">Combo</th>
+                <th scope="col">Drive Bars</th>
+                <th scope="col">Super</th>
+                <th scope="col">Remove</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for combo in favourites %}
+            <tr>
+                <td style="vertical-align: middle;">
+                    {% for str in combo[1].notation %}
+                        {% if str == 'crouching' %}
+                            <img src="./static/img/{{ str }}.png" alt="{{ str }}" class="button">
+                        {% elif str == 'chain' %}
+                            <img src="./static/img/{{ str }}.png" alt="{{ str }}" class="button" style="width: 3%;">
+                        {% elif str == 'fwd_diag_down' %}
+                            <img src="./static/img/crouching.png" alt="hold_down" class="button" style="transform: rotate(-45deg);">
+                        {% elif str == 'jumping' %}
+                            <img src="./static/img/crouching.png" alt="hold_down" class="button" style="transform: rotate(180deg);">
+                        {% elif str == 'standing' %}
+                        {% elif str == 'back' %}
+                            <img src="./static/img/crouching.png" alt="hold_down" class="button" style="transform: rotate(90deg);">
+                        {% elif str == 'forward' %}
+                            <img src="./static/img/crouching.png" alt="hold_down" class="button" style="transform: rotate(-90deg);">
+                        {% elif str == 'throw' %}
+                            <img src="./static/img/LightPunch.png" alt="{{ str }}" width="4.7%">
+                            <img src="./static/img/LightKick.png" alt="{{ str }}" width="4.7%">
+                        {% elif str == 'qcb' %}
+                            <img src="./static/img/qcf.png" alt="{{ str }}" class="button" style="transform: scaleX(-1);">
+                        {% elif str == 'qcb2' %}
+                            <img src="./static/img/qcf.png" alt="{{ str }}" class="button" style="transform: scaleX(-1);">
+                            <img src="./static/img/qcf.png" alt="{{ str }}" class="button" style="transform: scaleX(-1);">
+                        {% elif str == 'qcf' %}
+                            <img src="./static/img/qcf.png" alt="{{ str }}" class="button">
+                        {% elif str == 'qcf2' %}
+                            <img src="./static/img/qcf.png" alt="{{ str }}" class="button">
+                            <img src="./static/img/qcf.png" alt="{{ str }}" class="button">
+                        {% elif str == 'hcb' %}
+                            <img src="./static/img/hcf.png" alt="{{ str }}" class="button" style="transform: scaleX(-1);">
+                        {% elif str == 'hcf' %}
+                            <img src="./static/img/hcf.png" alt="{{ str }}" class="button">
+                        {% elif str == 'spd' %}
+                            <img src="./static/img/spd.png" alt="{{ str }}" class="button">
+                        {% elif str == 'double_spd' %}
+                            <img src="./static/img/spd.png" alt="{{ str }}" class="button">
+                            <img src="./static/img/spd.png" alt="{{ str }}" class="button">
+                        {% elif str == 'link' %}
+                            <img src="./static/img/{{ str }}.png" alt="{{ str }}" class="button" style="width: 3%; margin-right: -1.25%;">
+                        {% elif str == 'cancel' %}
+                            <img src="./static/img/{{ str }}.png" alt="{{ str }}" class="button" style="width: 2%; margin-right: -0.4%;">
+                        {% elif str == 'charge_down_up' %}
+                            <img src="./static/img/charge_down.png" alt="{{ str }}" class="button" style="margin-right: 0%;">
+                            <img src="./static/img/crouching.png" alt="hold_down" class="button" style="transform: rotate(180deg); margin-left: -1.25%;">            
+                        {% elif str == 'charge_back_forward' %}
+                            <img src="./static/img/charge_back.png" alt="{{ str }}" class="button" style="margin-right: 0;">
+                            <img src="./static/img/crouching.png" alt="hold_down" class="button" style="transform: rotate(-90deg); margin-left: 0;">
+                        {% elif str == 'charge_back_forward_back_forward' %}
+                            <img src="./static/img/charge_back.png" alt="{{ str }}" class="button" style="margin-right: 0;">
+                            <img src="./static/img/crouching.png" alt="hold_down" class="button" style="transform: rotate(-90deg); margin-left: 0;">
+                            <img src="./static/img/crouching.png" alt="hold_down" class="button" style="transform: rotate(90deg); margin-left: 0;">
+                            <img src="./static/img/crouching.png" alt="hold_down" class="button" style="transform: rotate(-90deg); margin-left: 0;">
+                        {% elif str == 'DRC' or str == 'DR' %}
+                            <img src="./static/img/DR.png" alt="drive_rush" class="button" style="margin-right: -0.5%;">
+                        {% elif str =='DI' %}
+                            <img src="./static/img/DI.png" alt="drive_rush" class="button" style="margin-right: -1.2%;">
+                        {% elif str == 'demon' %}
+                            <img src="./static/img/LightPunch.png" alt="{{ str }}" class="button">
+                            <img src="./static/img/Chain.png" alt="{{ str }}" class="button" style="width: 3%;">
+                            <img src="./static/img/LightPunch.png" alt="{{ str }}" class="button">
+                            <img src="./static/img/Chain.png" alt="{{ str }}" class="button" style="width: 3%;">
+                            <img src="./static/img/crouching.png" alt="{{ str }}" class="button" style="transform: rotate(-90deg);">
+                            <img src="./static/img/LightKick.png" alt="{{ str }}" class="button">
+                            <img src="./static/img/Chain.png" alt="{{ str }}" class="button" style="width: 3%;">
+                            <img src="./static/img/HeavyPunch.png" alt="{{ str }}" class="button">
+                        {% elif str == 'PP' or str == 'KK' %}
+                            <img src="./static/img/{{ str }}.png" alt="{{ str }}" width="7%">
+                        {% elif str == 'PPP' or str == 'KKK' %}
+                            <img src="./static/img/{{ str }}.png" alt="{{ str }}" width="9%">
+                        {% else %}
+                            <img src="./static/img/{{ str }}.png" alt="{{ str }}" class="button">
+                        {% endif %}
+                    {% endfor %}
+                </td>
+                <td>{{ combo[1].drive }}</td>
+                <td>
+                    {% if combo[1].bars == '1' %}
+                        Yes
+                    {% else %}
+                        No
+                    {% endif %}
+                </td>
+                <td>
+                    <a href={{ url_for('combo.delete', id=combo[0])}}>Remove</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+        <h3>You don't any favourite combos yet.</h3>
+    {% endif %}
+{% endblock %}

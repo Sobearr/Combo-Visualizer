@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block styles %}
+        {{ bootstrap.load_css() }}
+        <link rel="stylesheet" href="combovis/static/css/styles.css">
+        <style>
+            /* Custom button color */
+            .btn-custom {
+              background-color: #28a745; /* Change to your desired color */
+              color: white;
+            }
+
+            .btn-custom:hover {
+                background-color: #218838; /* Darker green on hover */
+                color: white;
+            }
+
+            /* Dark mode background and text */
+            body {
+              background-color: #121212;
+              color: #e0e0e0;
+            }
+
+            .navbar {
+              background-color: #1c1c1c;
+            }
+            
+            .visualized-combo-section {
+                background-color: #f1f1f1;
+                color: black;
+            }
+
+            /* Adjusting navbar link positions */
+            .navbar-nav.middle-link {
+                margin-left: 23.5%; /* Places one link closer to the center */
+            }
+
+            .navbar-nav.middle-link-solo {
+                margin-left: 28%;
+            }
+
+            .middle-link .nav-item {
+                margin-right: 30px;
+            }
+        </style>
+    {% endblock %}
+    <title>{% block title %}{% endblock %} | ComboVisualizer</title>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container-fluid">
+            <a href="{{ url_for('core.index') }}" class="navbar-brand"><img src="../static/img/Punch.png" alt="LOGO" width="12%"></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto w-100">
+                    <li class="nav-item mx-lg-auto">
+                        <a href="{{ url_for('combo.visualizer') }}" class="nav-link">Visualize a combo</a>
+                    </li>
+                    <li class="nav-item mx-lg-auto">
+                        <a href="{{ url_for('combo.favourite')}}" class="nav-link">Saved combos</a>
+                    </li>
+
+                    <li class="nav-item ms-lg-auto"></li>
+                    <li class="nav-item ms-lg-auto"></li>
+
+                    {% if current_user.is_authenticated %}
+                    <li class="nav-item">
+                        <a href="{{ url_for('auth.logout') }}" class="nav-link">Logout</a>
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a href="{{ url_for('auth.login') }}" class="nav-link">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ url_for('auth.register') }}" class="nav-link">Register</a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+    {% block content %}{% endblock %}
+
+    {% block scripts %}    
+        {{ bootstrap.load_js() }}
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script src="../static/js/test.js"></script>
+    {% endblock %}
+</body>
+</html>
