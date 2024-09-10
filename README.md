@@ -1,0 +1,1 @@
+Read SF6 combo in text notation and displays a visual representation of it to make learning easier.
