@@ -72,7 +72,7 @@ def convert_combo(notation):
         r'LP~LP~6LK~HP': 'demon ',
         r'5MPMK~66': 'DR ',
         r'22': 'down_down ',
-        r'66': 'forward_dash ',
+        r'66': 'fwd_dash ',
         r'44': 'back_dash ',
         r'214214': 'qcb2 ',
         r'236236': 'qcf2 ',
@@ -86,7 +86,7 @@ def convert_combo(notation):
         r'720': ' double_spd ',
         '~': ' chain '
     }
-    
+
     special_strip = [mv.strip() for mv in special_map.values()]
     move_strip = [mv.strip() for mv in move_map.values()]
     

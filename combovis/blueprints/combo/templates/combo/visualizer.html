@@ -52,6 +52,13 @@
                         <img src="./static/img/crouching.png" alt="hold_down" class="button" style="transform: rotate(90deg);">
                     {% elif str == 'forward' %}
                         <img src="./static/img/crouching.png" alt="hold_down" class="button" style="transform: rotate(-90deg);">
+                    {% elif str == 'down_down' %}
+                        <img src="./static/img/crouching.png" alt="hold_down" class="button">
+                        <img src="./static/img/crouching.png" alt="hold_down" class="button" style="margin-left: -2%;">
+                    {% elif str == 'fwd_dash' %}
+                        <img src="./static/img/{{ str }}.png" alt="hold_down" class="button" style="width: 7%; margin-right: -1.5%;">
+                    {% elif str == 'back_dash' %}
+                        <img src="./static/img/fwd_dash.png" alt="hold_down" class="button" style="width: 7%; margin-right: -1%; transform: scaleX(-1);">
                     {% elif str == 'throw' %}
                         <img src="./static/img/LightPunch.png" alt="{{ str }}" width="4.7%">
                         <img src="./static/img/LightKick.png" alt="{{ str }}" width="4.7%">
@@ -74,6 +81,8 @@
                     {% elif str == 'double_spd' %}
                         <img src="./static/img/spd.png" alt="{{ str }}" class="button">
                         <img src="./static/img/spd.png" alt="{{ str }}" class="button">
+                    {% elif str == 'reverse_dp' %}
+                        <img src="./static/img/dp.png" alt="{{ str }}" class="button" style="transform: scaleX(-1);">
                     {% elif str == 'link' %}
                         <img src="./static/img/{{ str }}.png" alt="{{ str }}" class="button" style="width: 3%; margin-right: -1.25%;">
                     {% elif str == 'cancel' %}
