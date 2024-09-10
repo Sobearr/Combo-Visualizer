@@ -33,8 +33,8 @@ import re
 def convert_combo(notation):
     # Mapping for move notations with patterns to ensure exact matching
     move_map = {
-        r'\bj.': 'jumping ',
-        r'\bdl.': 'delay ',
+        r'\bJ.': 'jumping ',
+        r'\bDL.': 'delay ',
         r'\b5': 'standing ',
         r'\b2': 'crouching ',
         r'\b3': 'fwd_diag_down ',
@@ -63,12 +63,17 @@ def convert_combo(notation):
 
     # Mapping for special notations
     special_map = {
+        ' ': ' ',
         ',': ' link ',
         '>': ' cancel ',
         r'\[2\]8': 'charge_down_up ',
         r'\[4\]646': 'charge_back_forward_back_forward ',
         r'\[4\]6': 'charge_back_forward ',
         r'LP~LP~6LK~HP': 'demon ',
+        r'5MPMK~66': 'DR ',
+        r'22': 'down_down ',
+        r'66': 'forward_dash ',
+        r'44': 'back_dash ',
         r'214214': 'qcb2 ',
         r'236236': 'qcf2 ',
         r'41236': ' hcf ',
@@ -81,7 +86,10 @@ def convert_combo(notation):
         r'720': ' double_spd ',
         '~': ' chain '
     }
-
+    
+    special_strip = [mv.strip() for mv in special_map.values()]
+    move_strip = [mv.strip() for mv in move_map.values()]
+    
     def translate_move(move):
         # Replace special notations first using regular expressions
         for key, value in special_map.items():
@@ -89,6 +97,11 @@ def convert_combo(notation):
         # Replace move notations using regular expressions
         for key, value in move_map.items():
             move = re.sub(key, value, move)
+
+        move_split = move.split(' ')
+        for piece in move_split:
+            if piece.strip() not in special_strip and piece not in move_strip:
+                move = move.replace(piece, 'unknown')
         return move
 
     # Split by 'link' notation

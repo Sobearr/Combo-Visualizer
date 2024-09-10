@@ -28,7 +28,8 @@ print('REPRESENTATION', combo_str)
 def visualizer():
     if request.method == 'POST':
         form_combo = request.form.get('combo_string')
-        converted_combo = convert_combo(form_combo).split(' ')
+        form_combo_upper = form_combo.upper()
+        converted_combo = convert_combo(form_combo_upper).split(' ')
         print('this is form', form_combo)
         print('this is convert', converted_combo)
         return render_template('combo/visualizer.html',
