@@ -56,7 +56,9 @@ def convert_combo(notation):
         r'\bLPLK\b': 'throw',
         r'\bDI\b': 'DI ',
         r'\bDRC\b': 'DRC ',
-        r'\bDR\b': 'DR '
+        r'\bDR\b': 'DR ',
+        r'\bCH\b': 'CH ',
+        r'\bPC\b': 'PC ',
     }
 
     # Mapping for special notations
