@@ -5,6 +5,41 @@
 {% block styles %}
     {{ super() }}
     <link rel="stylesheet" href="./static/css/styles.css">
+    <style>
+        th {
+        cursor: pointer;
+        user-select: none; /* Disable text selection */
+        }
+
+        th .sort-arrow {
+            margin-left: 8px;
+        }
+
+        th .sort-arrow::before {
+            content: '';
+            border: 5px solid transparent;
+            border-top-color: transparent;
+            border-bottom-color: transparent;
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        th.asc .sort-arrow::before {
+            border-bottom-color: black;
+        }
+
+        th.desc .sort-arrow::before {
+            border-top-color: black;
+        }
+
+        th .sort-arrow {
+            visibility: hidden; /* Hide arrows by default */
+        }
+
+        th.sorted .sort-arrow {
+            visibility: visible; /* Show arrows when column is sorted */
+        }
+    </style>
 {% endblock %}
 
 {% block content %}
@@ -20,12 +55,12 @@
     {% endwith %}
     <h1 class="text-center">Favourite Combos</h1>
     {% if favourites %}
-    <table class="table table-light table-striped table-bordered table-hover align-middle my-4">
+    <table class="table table-light table-striped table-bordered table-hover align-middle my-4" id="favouritesTable">
         <thead>
             <tr>
                 <th scope="col" class="text-center">Combo</th>
-                <th scope="col" class="text-nowrap">Drive Bars</th>
-                <th scope="col">Super</th>
+                <th scope="col" class="text-nowrap">Drive Bars<span class="sort-arrow"></span></th>
+                <th scope="col" class="text-nowrap">Super<span class="sort-arrow"></span></th>
                 <th scope="col"></th>
             </tr>
         </thead>
@@ -41,7 +76,7 @@
                     {% elif str == 'fwd_diag_down' %}
                         <img src="./static/img/crouching.png" alt="hold_down" class="button" style="transform: rotate(-45deg);">
                     {% elif str == 'jumping' %}
-                        <img src="./static/img/crouching.png" alt="hold_down" class="button" style="transform: rotate(180deg);">
+                        <img src="./static/img/crouching.png" alt="hold_down" class="button" style="transform: rotate(180deg); margin-left: -1%;">
                     {% elif str == 'standing' %}
                     {% elif str == 'back' %}
                         <img src="./static/img/crouching.png" alt="hold_down" class="button" style="transform: rotate(90deg);">
