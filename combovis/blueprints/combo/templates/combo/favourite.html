@@ -5,41 +5,6 @@
 {% block styles %}
     {{ super() }}
     <link rel="stylesheet" href="./static/css/styles.css">
-    <style>
-        th {
-        cursor: pointer;
-        user-select: none; /* Disable text selection */
-        }
-
-        th .sort-arrow {
-            margin-left: 8px;
-        }
-
-        th .sort-arrow::before {
-            content: '';
-            border: 5px solid transparent;
-            border-top-color: transparent;
-            border-bottom-color: transparent;
-            display: inline-block;
-            vertical-align: middle;
-        }
-
-        th.asc .sort-arrow::before {
-            border-bottom-color: black;
-        }
-
-        th.desc .sort-arrow::before {
-            border-top-color: black;
-        }
-
-        th .sort-arrow {
-            visibility: hidden; /* Hide arrows by default */
-        }
-
-        th.sorted .sort-arrow {
-            visibility: visible; /* Show arrows when column is sorted */
-        }
-    </style>
 {% endblock %}
 
 {% block content %}
@@ -173,4 +138,8 @@
         <h3>You don't any favourite combos yet.</h3>
     {% endif %}
 </div>
+{% endblock %}
+
+{% block scripts %}    
+    <script src="./static/js/sort.js"></script>
 {% endblock %}
