@@ -3,5 +3,21 @@
 {% block title %}Main Page{% endblock %}
 
 {% block content %}
-<h1>Main Page</h1>
+<div class="container mt-5">
+    <h1 class="text-center mb-5">Combo Visualizer</h1>
+
+    <h2 class="lead lh-lg text-start">
+        The notation for Street Fighter combos nowadays is mostly standardized. But for newcomers it can be scary to open up a page with their favourite character's combos
+        and be faced with a wall of odd combinations of letters and numbers that might disencourage them from learning those combos. That's where Combo Visualizer comes in.
+        This website is a tool that displays combo strings using icons similar to those used in Street Fighter 6. I hope this tool is useful for you, whether you are new to the genre or
+        a seasoned player.
+    </h2>
+    <hr class="mt-4 mb-4">
+    <h2 class="lead lh-lg text-start">
+        If you are looking for a place to get some combos and try this tool, I suggest the <a href="https://wiki.supercombo.gg/w/Street_Fighter_6" target="_blank" class="link-secondary link-underline-opacity-0">Super Combo Street Fighter 6</a> page, which features basic and situational combos for every
+        character in the game's roster. Once you have a combo, click on the button below to get started.
+    </h2>
+
+    <a href="{{ url_for('combo.visualizer') }}"><button class="btn btn-success btn-lg w-100 mt-5"><strong>Visualize combos now!</strong></button></a>
+</div>
 {% endblock %}
