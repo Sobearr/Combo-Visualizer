@@ -50,17 +50,6 @@ def create_combo():
         return render_template('combo/create_combo.html', combo=combo)
 
 
-@combo.route('/redirect', methods=['POST'])
-def redirect_character():
-    selected_character = request.form.get('characters')
-    return redirect(url_for('combo.character', name=selected_character))
-
-
-@combo.route('/character/<name>')
-def character(name):
-    return render_template('combo/character.html', name=name)
-
-
 @combo.route('/delete/<int:id>')
 @login_required
 def delete(id):

@@ -53,9 +53,3 @@ def register():
 def logout():
     logout_user()
     return redirect(url_for('core.index'))
-
-
-@auth_bp.route('/restricted')
-@login_required
-def restricted():
-    return render_template('auth/restricted.html')
