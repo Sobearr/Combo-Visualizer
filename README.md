@@ -18,3 +18,7 @@ After the user is logged in, they can save their favourite combos. This can be d
 
 The user can later view all favourite combos in the "Saved Combos" page.
 ![alt text](example_fav.png)
+
+
+## Acknowledgement
+Thanks to @TinyTorgue on Twitter/X, for creating the images in this tweet: https://twitter.com/TinyTorgue/status/1727785374540284211 and allowing people to use them.
