@@ -1,8 +1,10 @@
+# Combo Visualizer
+
 This is a tool that reads Street Fighter 6 combo strings and displays them using icons similar to those used in Street Fighter 6. My goal is to help players learn combos faster by providing accurate, user-friendly representations of combos. 
 
 I have always found that written combo notations were a little hard to understand, so I hope this might be useful to people.
 
-Here is an example of how it works:
+## How it works
 ![alt text](example_visualize.png)
 - The user types/pastes a combo
 - The user clicks in "Visualize"
