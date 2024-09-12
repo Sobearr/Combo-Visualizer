@@ -4,6 +4,7 @@ document.addEventListener("DOMContentLoaded", function() {
     let sortDirection = 1; // 1 for ascending, -1 for descending
     let lastSortedColumn = null;
   
+    // Get all headers and their respective indexes
     headers.forEach((header, index) => {
         header.addEventListener('click', () => {
             if (lastSortedColumn === index) {
@@ -15,7 +16,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 lastSortedColumn = index;
             }
   
-            // Reset classes for all headers
+            // Reset sorting classes for all headers
             headers.forEach(h => {
                 h.classList.remove('asc', 'desc', 'sorted');
             });
@@ -26,12 +27,14 @@ document.addEventListener("DOMContentLoaded", function() {
             sortTableByColumn(table, index, sortDirection);
         });
     });
-  
+   
     function sortTableByColumn(table, column, direction) {
+        // Getting the first, and only, tbody in the table
         const tbody = table.tBodies[0];
         const rowsArray = Array.from(tbody.querySelectorAll('tr'));
   
-        const isNumericColumn = column === 1;  // Assuming 'Drive Bars' is the 2nd column (index 1)
+        // 'Drive Bars' is the 2nd column (index 1)
+        const isNumericColumn = column === 1;
   
         rowsArray.sort((rowA, rowB) => {
             const cellA = rowA.cells[column].innerText.trim();
