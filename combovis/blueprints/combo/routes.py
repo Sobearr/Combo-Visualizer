@@ -23,17 +23,6 @@ def visualizer():
                                combo_str='', raw_combo='')
 
 
-@combo.route('/create_combo', methods=['GET', 'POST'])
-def create_combo():
-    if request.method == 'GET':
-        return render_template('combo.create_combo.html')
-    elif request.method == 'POST':
-        combo = request.form.get('combo')
-        combo = convert_combo(combo).split(' ')
-        print(combo)
-        return render_template('combo/create_combo.html', combo=combo)
-
-
 # Route that handles the deletion of saved combos
 @combo.route('/delete/<int:id>')
 @login_required
