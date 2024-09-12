@@ -1,34 +1,35 @@
 import re
 
-# this is the logic to interpet user inputted combos
-# and translating them into a visual representation
+# This is the logic to interpet user inputted combos
 
-
-# combo notation
-# 2MK > 236P - cancel 2MK into fireball
+# Some examples of combo notation:
+# 2MK > 236P - cancel 2MK into 236P
 # LP~MP - chain MP after LP (target combos or additional inputs)
 # 5MP, 2MP - link 2MP after 5MP
 # [2] - charge input 2
 # j. - jump
 # dl. - delay
 
-# command normals might have these
+# Command normals might have these
 # 2 - ↓ (crouching)
+# 3 - ↘
 # 4 - ←
 # 6 - →
 
-# drive meter moves
+# Drive meter moves
 # DR - drive rush
 # DI - drive impact
 
-# motion inputs
+# Motion inputs
 # 214 - QCB
 # 236 - QCF
 # 623 - DP
+# [2]8 - hold down (charge), release and press up
 
-# coutner states
+# Counter states
 # CH - counter hit
 # PC - punish counter
+
 
 def convert_combo(notation):
     # Mapping for move notations with patterns to ensure exact matching
@@ -89,15 +90,17 @@ def convert_combo(notation):
 
     special_strip = [mv.strip() for mv in special_map.values()]
     move_strip = [mv.strip() for mv in move_map.values()]
-    
+
     def translate_move(move):
         # Replace special notations first using regular expressions
         for key, value in special_map.items():
             move = re.sub(key, value, move)
+
         # Replace move notations using regular expressions
         for key, value in move_map.items():
             move = re.sub(key, value, move)
 
+        # Ensure that unknown inputs are not partially displayed as correct ones
         move_split = move.split(' ')
         for piece in move_split:
             if piece.strip() not in special_strip and piece not in move_strip:
@@ -112,15 +115,9 @@ def convert_combo(notation):
         # Split by 'cancel' notation
         moves = part.split('>')
         converted_moves = [translate_move(move) for move in moves]
+
         # Join parts by 'cancel'
         converted_combo.append(' cancel '.join(converted_moves))
 
     # Join all parts by 'link'
     return ' link '.join(converted_combo)
-
-
-# Example usage
-# combo = 'j.MK, 5MP, 2MP > [2]8MK'
-combo = "j.MK > 5LP, 2MP ~ [2]8K, 5P"
-result = convert_combo(combo)
-print(result)

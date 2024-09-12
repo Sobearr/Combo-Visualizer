@@ -4,34 +4,18 @@ from combovis.app import db
 from .models import Combo, Favourite
 import ast
 
-# from combo_reader import convert_combo
 from .combo_reader import convert_combo
 
 combo = Blueprint('combo', __name__, static_folder='static', template_folder='templates')
 
 
-# @combo.route('/')
-# def index():
-#     if request.method == 'POST':
-#         form_combo = request.form.get('combo_string')
-#         form_combo = convert_combo(form_combo).split(' ')
-#         print(form_combo)
-#         return render_template('index.html', combo=form_combo)
-#     else:
-#         return render_template('index.html', combo=combo)
-combo_str = '8HP, 2MK > 236MK'
-combo_str = convert_combo(combo_str).split(' ')
-print('REPRESENTATION', combo_str)
-
-
+# Route that handles combo visualization
 @combo.route('/visualizer', methods=['GET', 'POST'])
 def visualizer():
     if request.method == 'POST':
         form_combo = request.form.get('combo_string')
         form_combo_upper = form_combo.upper()
         converted_combo = convert_combo(form_combo_upper).split(' ')
-        print('this is form', form_combo)
-        print('this is convert', converted_combo)
         return render_template('combo/visualizer.html',
                                combo_str=converted_combo, raw_combo=form_combo)
     else:
@@ -50,10 +34,10 @@ def create_combo():
         return render_template('combo/create_combo.html', combo=combo)
 
 
+# Route that handles the deletion of saved combos
 @combo.route('/delete/<int:id>')
 @login_required
 def delete(id):
-    # need user_id and combo_id, or maybe only fav id
     fav = Favourite.query.filter_by(fid=id).first()
     if fav:
         db.session.delete(fav)
@@ -71,23 +55,32 @@ def favourite():
     if request.method == 'POST':
         combo = request.form.get('combo_string')
         if len(combo) > 2:
-            # add combo to db with user id
+            # Add combo to db with user id
             check_combo = Combo.query.filter_by(notation=combo).first()
+
+            # Add new combo to the DB
             if not check_combo:
-                # combo does not exist
+                # Combo does not exist
                 combo_str = request.form.get('combo_str')
+
+                # Clean the combo string
                 cleaned_string = combo_str.strip("[]").strip('"')
                 combo_list = ast.literal_eval(cleaned_string)
+
+                # Buttons that spend drive bars
                 drive_1 = ['DI', 'DR']
                 drive_2 = ['PP', 'KK', 'PPP', 'KKK']
                 drive = 0
+
+                # Bars would have other purpose, now it should be a boolean but I haven't change the Combo model, maybe later...
                 bars = '0'
+
+                # Check input validity and calculate the use of drive bars and supers
                 for btn in combo_list:
                     if btn == 'unknown':
                         flash('Cannot save combos with \'unknown\' inputs', 'warning')
                         return redirect(url_for('combo.visualizer'))
                     if btn in ['qcb2', 'qcf2', 'charge_back_forward_back_forward', 'demon']:
-                        print('detected a super!')
                         bars = '1'
                     if btn in drive_1:
                         drive += 1
@@ -95,12 +88,14 @@ def favourite():
                         drive += 2
                     elif btn == 'DRC':
                         drive += 3
-                print('drive value is', drive)
+
+                # Add combo do DB
                 new_combo = Combo(notation=combo, drive=str(drive), bars=bars)
 
                 db.session.add(new_combo)
                 db.session.commit()
 
+            # Add combo to user's favourites
             cid = Combo.query.filter_by(notation=combo).first().cid
 
             favourite = Favourite.query.filter_by(cid=cid, uid=uid).first()
